@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie Suggestion App</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full-screen background with movie scenes */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://i.etsystatic.com/35367581/r/il/57c503/5790337005/il_fullxfull.5790337005_5ili.jpg'); /* Background movie scene image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        .app-container {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for better readability */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        select, button {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+            border: none;
+        }
+
+        select {
+            background-color: #333;
+            color: white;
+        }
+
+        button {
+            background-color: #6200ea;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+
+        .movie-suggestion {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fff;
+            font-style: italic;
+        }
+
+        .movie-suggestion span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1>Movie Suggestion App</h1>
+        <p>Select a genre, rating, and get a movie suggestion!</p>
+        
+        <!-- Genre Dropdown -->
+        <label for="genreSelect">Genre:</label>
+        <select id="genreSelect">
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="horror">Horror</option>
+            <option value="sci-fi">Sci-Fi</option>
+            <option value="animation">Animation</option>
+        </select>
+
+        <!-- Rating Dropdown -->
+        <label for="ratingSelect">Rating:</label>
+        <select id="ratingSelect">
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select>
+        
+        <!-- Button to Generate Movie Suggestion -->
+        <button id="generateButton">Get Movie Suggestion</button>
+
+        <!-- Display Movie Suggestion -->
+        <div id="movieSuggestion" class="movie-suggestion">
+            <!-- Movie suggestion will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Movie suggestions categorized by genre and rating
+        const movieGenres = {
+            action: {
+                G: ["The Lego Movie"],
+                PG: ["The Incredibles"],
+                "PG-13": ["The Dark Knight", "Mad Max: Fury Road", "John Wick"],
+                R: ["Die Hard", "John Wick: Chapter 3"]
+            },
+            comedy: {
+                G: ["Toy Story"],
+                PG: ["Home Alone", "Shrek"],
+                "PG-13": ["Superbad", "Step Brothers"],
+                R: ["The Big Lebowski", "Monty Python and the Holy Grail"]
+            },
+            drama: {
+                G: ["The Lion King"],
+                PG: ["Forrest Gump", "The Pursuit of Happyness"],
+                "PG-13": ["The Shawshank Redemption", "Goodfellas"],
+                R: ["The Godfather", "A Beautiful Mind"]
+            },
+            horror: {
+                G: ["Gremlins"],
+                PG: ["The Sixth Sense"],
+                "PG-13": ["The Conjuring", "Get Out"],
+                R: ["Hereditary", "The Exorcist"]
+            },
+            "sci-fi": {
+                G: ["Star Wars: A New Hope"],
+                PG: ["E.T. the Extra-Terrestrial"],
+                "PG-13": ["Inception", "Interstellar"],
+                R: ["Blade Runner 2049", "The Matrix"]
+            },
+            animation: {
+                G: ["Finding Nemo", "The Lion King"],
+                PG: ["Shrek", "Toy Story"],
+                "PG-13": ["Spider-Man: Into the Spider-Verse"],
+                R: ["South Park: Bigger, Longer & Uncut"]
+            }
+        };
+
+        // Get the button, genre select, rating select, and movie suggestion element
+        const generateButton = document.getElementById("generateButton");
+        const genreSelect = document.getElementById("genreSelect");
+        const ratingSelect = document.getElementById("ratingSelect");
+        const movieSuggestion = document.getElementById("movieSuggestion");
+
+        // Function to generate a random movie suggestion based on the selected genre and rating
+        function getRandomMovie(genre, rating) {
+            const genreMovies = movieGenres[genre] && movieGenres[genre][rating];
+            if (genreMovies && genreMovies.length > 0) {
+                const randomIndex = Math.floor(Math.random() * genreMovies.length);
+                return genreMovies[randomIndex];
+            } else {
+                return `No movies found for this combination of genre and rating.`;
+            }
+        }
+
+        // Event listener for the button
+        generateButton.addEventListener("click", () => {
+            const selectedGenre = genreSelect.value; // Get selected genre
+            const selectedRating = ratingSelect.value; // Get selected rating
+            const suggestion = getRandomMovie(selectedGenre, selectedRating); // Get a random movie from that genre and rating
+            movieSuggestion.textContent = `We suggest you watch: "${suggestion}"`;
+        });
+    </script>
+</body>
+</html>

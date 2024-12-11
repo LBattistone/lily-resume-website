@@ -1,0 +1,44 @@
+/*  Font Color */
+body {
+    color: #681068
+}
+h1 {
+    color: palevioletred
+}
+
+/* Font Family */
+body {
+    font-family: 'Arial', sans-serif;
+}
+h1 {
+    font-family: 'Georgia', serif;
+}
+
+/* Styling and Positioning of divs */
+/* Div for a header section */
+.header-div {
+    background-color: #f0f0f0;
+    padding: 20px
+    text-align: center;
+    margin-bottom: 20px
+}
+
+/* Div for the main content section */
+.content-div {
+    background-color: #ffffff;
+    padding: 30px;
+    margin: 20px 0;
+    text-align: left;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/*Div for a footer section */
+.footer-div {
+    background-color: #333333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
